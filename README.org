@@ -1,0 +1,5 @@
+These "local.rc" files are shell scripts to set up environment
+variables, commands, aliases etc needed for work in different
+environments/systems or by different packages (e.g. anaconda)
+
+These are intended to be sourced out of ~/.bashrc
