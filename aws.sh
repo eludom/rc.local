@@ -9,3 +9,8 @@ awsRmAll () {
 #
 
 alias awsrmall=awsRmAll
+
+
+# command line stuff
+
+complete -C aws_completer aws
