@@ -1,4 +1,7 @@
-export PATH=~"~/.local/bin/:${PATH}"
+# AWS Aliases and path settings
+
+pathfirst ~/.local/bin
+
 
 awsRmAll () {
     # Remove all objects in an AWS bucket
