@@ -6,7 +6,7 @@
 #     passurl pass-name  # print url
 #     passuser pass-name # print user
 #     passopen pass-name # print username, copy pasword to clipboard, open URL
-# 
+#
 
 
 # define browser to use
@@ -18,8 +18,8 @@ passurlFunc () {
     # Assumes the URL is stored in a line like:
     #
     #   url: https://example.com
-    
-    pass $1 | grep '^url:' | sed 's/^[ \t]*url:[ \t]*//i'
+
+    pass $1 | grep -i '^url:' | sed 's/^[ \t]*url:[ \t]*//i'
 }
 
 passuserFunc () {
@@ -28,8 +28,8 @@ passuserFunc () {
     # Assumes the username is stored in a line like:
     #
     #   username: FOO
-    
-    pass $1 | grep '^username:' | sed 's/^[ \t]*username:[ \t]*//i'
+
+    pass $1 | grep -i '^username:' | sed 's/^[ \t]*username:[ \t]*//i'
 }
 
 passopenFunc () {
