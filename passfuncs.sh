@@ -10,7 +10,7 @@
 
 
 # define browser to use
-export passBrowser=google-chrome
+export passBrowser=firefox
 
 passurlFunc () {
     # print the URL for a password stored in pass
