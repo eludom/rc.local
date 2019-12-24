@@ -10,7 +10,7 @@
 
 
 # define browser to use
-export passBrowser=firefox
+export passBrowser=brave-browser
 
 passurlFunc () {
     # print the URL for a password stored in pass
@@ -35,6 +35,29 @@ passuserFunc () {
 passopenFunc () {
     # Print username, copy password to clipboard, open url in browser
     #
+    # Usage: passopenFunc username [browser]
+    #
+    # Assumes the URL is stored in a line like:
+    #
+    #   username: FOO
+
+    if [[ -z "${2}" ]]; then
+        BROWSER="$passBrowser"
+    else
+        BROWSER="${2}"
+    fi
+
+    echo -n username: " "
+    passuserFunc $1
+    pass -c $1
+    $BROWSER `passurl $1` &
+}
+
+passCopyFunc () {
+    # Print username, copy password to clipboard
+    #
+    # Usage: passCopyFunc username
+    #
     # Assumes the URL is stored in a line like:
     #
     #   username: FOO
@@ -42,9 +65,9 @@ passopenFunc () {
     echo -n username: " "
     passuserFunc $1
     pass -c $1
-    $passBrowser `passurl $1` &
 }
 
 alias passurl=passurlFunc
+alias passc=passCopyFunc
 alias passuser=passuserFunc
 alias passopen=passopenFunc
