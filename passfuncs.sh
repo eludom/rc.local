@@ -71,3 +71,42 @@ alias passurl=passurlFunc
 alias passc=passCopyFunc
 alias passuser=passuserFunc
 alias passopen=passopenFunc
+
+
+#
+# THIS IS NOT QUITE DEBUGGED
+#
+function passpath {
+    #set -e -u
+    # Print the path for string matched by pass-find
+    #
+    # This basically undoes the output of tree(1)
+    # and rolls it into a '/' separated path
+    # so that I can use it with things like "pass -c FOO"
+    #
+    # Usage passpath PATH
+    #
+    #
+
+    # Make sure we have an argument
+
+    if [ $# -eq 0 ]
+    then
+        echo "Usage: passpath NAME"
+    else
+        # if there is more than one match, print the tree
+        count=`pass find $1 | grep $1 | grep -v "Search Term" | wc -l`
+
+        if [ "$count" -gt "1" ]; then
+            pass find $1
+        else
+            # only one patch, print the path
+            pass find $1 | #
+                grep -v Terms | # get rid of terms #
+                tr '\n' '/' | # \n to /
+                LC_ALL=C tr -dc '\0-\177' | # get rid of all non-ascii
+                tr -d ' ' | # no spaces
+                sed 's/\/$/\n/'  #fina / becomes newline
+        fi # more than one match
+    fi # no argument
+}
