@@ -16,7 +16,7 @@ if [ -z "$JAVA_HOME" ]; then
 
     if [ -z "$JAVA_PATH" ]; then
         unset JAVA_PATH
-        warn "javac not installed."
+        #warn "javac not installed."
     else
         export JAVA_HOME=$(dirname $(dirname $(readlink -f "$JAVA_PATH")))
     fi
