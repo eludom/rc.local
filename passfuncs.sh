@@ -86,7 +86,7 @@ function passpath {
     #
     # Usage passpath PATH
     #
-    #
+    # BUGS: only works for a single unique match
 
     # Make sure we have an argument
 
@@ -106,7 +106,8 @@ function passpath {
                 tr '\n' '/' | # \n to /
                 LC_ALL=C tr -dc '\0-\177' | # get rid of all non-ascii
                 tr -d ' ' | # no spaces
-                sed 's/\/$/\n/'  #fina / becomes newline
+                sed 's/\/$/\n/' | #final / becomes newline
+                sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" # get rid of color escape sequences
         fi # more than one match
     fi # no argument
 }
